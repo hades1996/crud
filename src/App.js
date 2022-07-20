@@ -1,6 +1,18 @@
-import React from 'react'
+
+import React,{ useState} from 'react'
+import { isEmpty } from 'lodash';
 
 function App() {
+  const [task, setTask] = useState("")
+  const addTask=(e)=>{
+    e.preventDefault()
+      if (isEmpty(task)){
+        console.log("Task empety")
+        return
+      }
+    console.log("ok")
+    setTask("")
+  }
   return (
     <div className='container mt-5'>
       <h1>tareas</h1>
@@ -18,11 +30,13 @@ function App() {
         </div>
         <div className='col-4'> 
           <h4 className='text-center'>formulario</h4>
-          <form>
+          <form onSubmit={addTask}>
             <input 
             type="text" 
             className='form-control mb-2'
-            placeholder='ingrese la tarea...'></input>
+            placeholder='ingrese la tarea...'
+            onChange={(text)=> setTask(text.target.value)}
+            value={task}></input>
             <button 
             className='btn btn-dark btn-block'
             type='submit'>agregar</button>
